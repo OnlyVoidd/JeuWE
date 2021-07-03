@@ -18,6 +18,7 @@ public class Mouvement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D col;
     private float timeSinceLastDash;
+    private float distance;
     
     // Start is called before the first frame update
     void Start()
@@ -29,15 +30,18 @@ public class Mouvement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         if (Input.GetButtonDown("Fire1") && Time.time - timeSinceLastDash >= cooldown)
         {
+
             int dir = inputX >= 0 ? 1 : -1;
             transform.Translate(DashSpeed * new Vector2(dir,0));
             timeSinceLastDash = Time.time;
         }
         else 
         {
+            
             inputX = Input.GetAxisRaw("Horizontal");
             Vector2 movement = new Vector2(playerspeed * inputX, 0);
 
