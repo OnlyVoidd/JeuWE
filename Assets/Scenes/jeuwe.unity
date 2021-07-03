@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865882076209686808, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865882076209686808, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
@@ -369,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2865882076209686808, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb5edb06e9a95434aa59a692a8f4e24e, type: 3}
@@ -406,13 +406,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3f0724a5ffbd345afc7a559be7dc27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerspeed: 15
-  jumpForce: 20
+  playerspeed: 10
+  jumpForce: 40
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  DashSpeed: 1.75
+  DashSpeed: 35
+  DashDistance: 10
   cooldown: 0.75
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!61 &809853404
 BoxCollider2D:
   m_ObjectHideFlags: 0
