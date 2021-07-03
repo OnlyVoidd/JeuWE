@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
         {
             ToggleComponents();
 
+            rb.velocity = Vector2.zero;
+
             float gravity = rb.gravityScale;
             rb.gravityScale = 0f;
 

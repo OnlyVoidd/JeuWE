@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Mouvement : MonoBehaviour
 {
-    float inputX;
+    private float inputX;
     [SerializeField]
     private float playerspeed = 1f;
     [SerializeField]
-    public float jumpForce = 1f;
+    private float jumpForce = 1f;
     [SerializeField]
     private LayerMask groundLayers;
     [SerializeField]
@@ -16,39 +16,37 @@ public class Mouvement : MonoBehaviour
     [SerializeField]
     private float cooldown = 1f;
     private Rigidbody2D rb;
-    public BoxCollider2D col;
-    private float NextDash;
+    private BoxCollider2D col;
+    private float timeSinceLastDash;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
-
+        timeSinceLastDash = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        inputX = Input.GetAxisRaw("Horizontal");
-        Vector2 movement = new Vector2(playerspeed * inputX, 0);
-        NextDash = Time.time + cooldown;
-        if (Input.GetButtonDown("Fire1") && Time.time>NextDash )
+        if (Input.GetButtonDown("Fire1") && Time.time - timeSinceLastDash >= cooldown)
         {
+            int dir = inputX >= 0 ? 1 : -1;
+            transform.Translate(DashSpeed * new Vector2(dir,0));
+            timeSinceLastDash = Time.time;
+        }
+        else 
+        {
+            inputX = Input.GetAxisRaw("Horizontal");
+            Vector2 movement = new Vector2(playerspeed * inputX, 0);
 
-            transform.Translate(DashSpeed * movement);
-         }
-        else { 
-        
-       
-             rb.AddForce(movement);
-        
-       
+            rb.AddForce(movement);
 
-             if (IsGrounded() && Input.GetButtonDown("Jump"))
-             {
-              rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-             }
+            if (IsGrounded() && Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
 
     }
