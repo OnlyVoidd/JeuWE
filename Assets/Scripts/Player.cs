@@ -14,9 +14,12 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private float gravity;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gravity = rb.gravityScale;
     }
 
     public IEnumerator Die()
@@ -32,7 +35,6 @@ public class Player : MonoBehaviour
 
             rb.velocity = Vector2.zero;
 
-            float gravity = rb.gravityScale;
             rb.gravityScale = 0f;
 
             yield return new WaitForSeconds(spawnCooldown);

@@ -8,6 +8,7 @@ public class FatalCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+
             Player player = (Player)collision.gameObject.GetComponent(typeof(Player));
             StartCoroutine(player.Die());
         }
