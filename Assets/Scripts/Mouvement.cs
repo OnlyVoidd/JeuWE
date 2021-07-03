@@ -9,9 +9,16 @@ public class Mouvement : MonoBehaviour
     private float playerspeed = 1f;
     [SerializeField]
     public float jumpForce = 1f;
+    [SerializeField]
+    private LayerMask groundLayers;
+    [SerializeField]
+    private float DashSpeed = 1f;
+    [SerializeField]
+    private float cooldown = 1f;
     private Rigidbody2D rb;
     public BoxCollider2D col;
-    public LayerMask groundLayers; 
+    private float NextDash;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,23 +30,32 @@ public class Mouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       inputX = Input.GetAxisRaw("Horizontal");
-       Vector2 movement = new Vector3(playerspeed * inputX, 0);
-       rb.AddForce(movement);
-       if (IsGrounded() && Input.GetButtonDown("Jump"))
+        inputX = Input.GetAxisRaw("Horizontal");
+        Vector2 movement = new Vector2(playerspeed * inputX, 0);
+        NextDash = Time.time + cooldown;
+        if (Input.GetButtonDown("Fire1") && Time.time>NextDash )
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            transform.Translate(DashSpeed * movement);
+         }
+        else { 
+        
+       
+             rb.AddForce(movement);
+        
+       
+
+             if (IsGrounded() && Input.GetButtonDown("Jump"))
+             {
+              rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+             }
         }
-       Debug.Log(IsGrounded());
 
     }
 
 
     private bool IsGrounded()
     {
-        return Physics.CheckCapsule(col.bounds.center, new Vector2(col.bounds.center.x,
-            col.bounds.min.y),col.shapeCount,groundLayers);
-        
-       
+        return Physics2D.IsTouchingLayers(col,groundLayers); 
     }
 }
