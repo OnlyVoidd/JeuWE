@@ -25,6 +25,11 @@ public class Mouvement : MonoBehaviour
     private float posFinish;
     private float gravity;
 
+    public bool IsDashing
+    {
+        get => isDashing;
+    }
+
     [SerializeField]
     private LayerMask wallLayer;
 

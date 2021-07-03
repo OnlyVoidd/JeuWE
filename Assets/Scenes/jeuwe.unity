@@ -411,7 +411,7 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  DashSpeed: 35
+  DashSpeed: 50
   DashDistance: 10
   cooldown: 0.75
   wallLayer:
