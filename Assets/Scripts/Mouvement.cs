@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mouvement : MonoBehaviour
 {
+    float inputX;
     [SerializeField]
     private float playerspeed = 1f;
     [SerializeField]
@@ -22,23 +23,23 @@ public class Mouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        float inputX = Input.GetAxisRaw("Horizontal");
-        Vector3 movement = new Vector3(playerspeed * inputX * Time.deltaTime, 0, 0);
-        rb.AddForce(movement)
-        if (Input.GetButtonDown("Jump"))
+       inputX = Input.GetAxisRaw("Horizontal");
+       Vector2 movement = new Vector3(playerspeed * inputX, 0);
+       rb.AddForce(movement);
+       if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(movement, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        
-        
+       Debug.Log(IsGrounded());
 
     }
 
 
-    private void FixedUpdate()
+    private bool IsGrounded()
     {
-            
-
+        return Physics.CheckCapsule(col.bounds.center, new Vector2(col.bounds.center.x,
+            col.bounds.min.y),col.shapeCount,groundLayers);
+        
+       
     }
 }
