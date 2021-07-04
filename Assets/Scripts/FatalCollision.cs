@@ -10,7 +10,10 @@ public class FatalCollision : MonoBehaviour
         {
             Mouvement playerMov = (Mouvement)collision.gameObject.GetComponent(typeof(Mouvement));
 
-            if (playerMov.IsDashing) Destroy(gameObject, 0.2f); //StartCoroutine(GetComponent<EnemyMovement>().Die());
+            if (playerMov.IsDashing)
+            {
+                Destroy(gameObject, 0.2f);
+            } //StartCoroutine(GetComponent<EnemyMovement>().Die());
             else
             {
                 Player player = (Player)collision.gameObject.GetComponent(typeof(Player));
