@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,11 @@ public class EnemyMovement : MonoBehaviour
             transform.Translate(new Vector2(enemySpeed * Time.deltaTime * dir, 0));
         }
         else target = target == wp1 ? wp2 : wp1;
+    }
+
+    internal string Die()
+    {
+        throw new NotImplementedException();
     }
 
     private bool WaypointReached(Transform target)
